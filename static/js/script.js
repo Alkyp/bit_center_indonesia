@@ -1,43 +1,44 @@
-/* ===========================
-   SPLASH SCREEN (muncul sekali)
-=========================== */
+/* ============================================================
+   SEMUA SCRIPT DIJALANKAN SAAT DOM SUDAH SIAP
+============================================================ */
 document.addEventListener("DOMContentLoaded", function () {
+
+    /* ===========================
+       SPLASH SCREEN
+    ============================ */
     const splash = document.getElementById("splash");
+    if (splash) {
+        if (!localStorage.getItem("splashShown")) {
+            splash.style.display = "flex";
 
-    if (!localStorage.getItem("splashShown")) {
-        splash.style.display = "flex";
+            setTimeout(() => {
+                splash.classList.add("fade-out");
+                localStorage.setItem("splashShown", "true");
+            }, 3600);
 
-        setTimeout(() => {
-            splash.classList.add("fade-out");
-            localStorage.setItem("splashShown", "true");
-        }, 3600);
+            setTimeout(() => {
+                splash.style.display = "none";
+            }, 3000);
 
-        setTimeout(() => {
+        } else {
             splash.style.display = "none";
-        }, 3000);
-
-    } else {
-        splash.style.display = "none";
+        }
     }
-});
 
-/* ===========================
-   NAVBAR STICKY
-=========================== */
-window.addEventListener("scroll", function () {
-    const navbar = document.querySelector(".navbar");
-    navbar.classList.toggle("sticky", window.scrollY > 20);
+    /* ===========================
+       NAVBAR STICKY
+    ============================ */
+    window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (navbar) navbar.classList.toggle("sticky", window.scrollY > 20);
 
-    const scrollBtn = document.querySelector(".scroll-up-btn");
-    if (scrollBtn) {
-        scrollBtn.classList.toggle("show", window.scrollY > 500);
-    }
-});
+        const scrollBtn = document.querySelector(".scroll-up-btn");
+        if (scrollBtn) scrollBtn.classList.toggle("show", window.scrollY > 500);
+    });
 
-/* ===========================
-   MENU TOGGLE MOBILE
-=========================== */
-document.addEventListener("DOMContentLoaded", function () {
+    /* ===========================
+       MENU TOGGLE MOBILE
+    ============================ */
     const menuBtn = document.querySelector(".menu-btn");
     const menu = document.querySelector(".navbar .menu");
 
@@ -51,29 +52,24 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".navbar .menu li a").forEach(link => {
         link.addEventListener("click", () => {
             menu.classList.remove("active");
-            menuBtn.classList.remove("active");
+            if (menuBtn) menuBtn.classList.remove("active");
         });
     });
-});
 
-/* ===========================
-   SCROLL-UP BUTTON CLICK
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
+    /* ===========================
+       SCROLL-UP BUTTON
+    ============================ */
     const scrollBtn = document.querySelector(".scroll-up-btn");
     if (scrollBtn) {
         scrollBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-});
 
-/* ===========================
-   COUNTER ANIMATION
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
+    /* ===========================
+       COUNTER ANIMATION
+    ============================ */
     const counters = document.querySelectorAll(".counter");
-
     counters.forEach(counter => {
         const update = () => {
             const target = +counter.getAttribute("data-target");
@@ -92,12 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         update();
     });
-});
 
-/* ===========================
-   PRODUCT SECTION ANIMATION
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
+    /* ===========================
+       PRODUCT SECTION ANIMATION
+    ============================ */
     const productImg = document.querySelector(".product-image img");
     const labels = document.querySelectorAll(".label");
 
@@ -115,36 +109,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                showProductDetails();
-            }
-        });
-    });
-
     const productSection = document.querySelector(".product-section");
-    if (productSection) observer.observe(productSection);
-});
+    if (productSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) showProductDetails();
+            });
+        });
+        observer.observe(productSection);
+    }
 
-/* ===========================
-   LOGO CAROUSEL (auto scroll)
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
+    /* ===========================
+       LOGO CAROUSEL AUTO SCROLL
+    ============================ */
     const track = document.querySelector(".logo-track");
     if (track) {
         const copy = track.cloneNode(true);
         track.parentElement.appendChild(copy);
     }
-});
 
-/* ===========================
-   OWL CAROUSEL TEAMS
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
-    const carousel = document.querySelector(".carousel");
-
-    if (carousel && $(carousel).owlCarousel) {
+    /* ===========================
+       OWL CAROUSEL
+    ============================ */
+    if ($(".carousel").owlCarousel) {
         $(".carousel").owlCarousel({
             margin: 20,
             loop: true,
@@ -158,34 +145,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
 
-/* ===========================
-   HOME BACKGROUND SLIDESHOW
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".home-slide");
+    /* ===========================
+       HOME SLIDESHOW
+    ============================ */
+    const homeSlides = document.querySelectorAll(".home-slide");
+    if (homeSlides.length > 0) {
+        let homeIndex = 0;
 
-    if (slides.length === 0) return;
+        function showHomeSlides() {
+            homeSlides.forEach(slide => slide.classList.remove("active"));
+            homeIndex = (homeIndex + 1) % homeSlides.length;
+            homeSlides[homeIndex].classList.add("active");
+            setTimeout(showHomeSlides, 4000);
+        }
 
-    function showSlides() {
-        slides.forEach(slide => slide.classList.remove("active"));
-
-        slideIndex = (slideIndex + 1) % slides.length;
-
-        slides[slideIndex].classList.add("active");
-
-        setTimeout(showSlides, 4000);
+        showHomeSlides();
     }
 
-    showSlides();
-});
-
-/* ===========================
-   HAMBURGER USING JQUERY
-=========================== */
-$(document).ready(function () {
+    /* ===========================
+       HAMBURGER (jQuery)
+    ============================ */
     $(".hamburger").click(function () {
         $(".navbar .menu").toggleClass("active");
     });
@@ -193,37 +173,61 @@ $(document).ready(function () {
     $(".navbar .menu li a").click(function () {
         $(".navbar .menu").removeClass("active");
     });
-});
 
-/* ===========================
-   PRODUCT SLIDER (MANUAL)
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
-    const slides = document.querySelectorAll('.product-slide');
-    const prevBtn = document.querySelector('.product-prev');
-    const nextBtn = document.querySelector('.product-next');
-    let currentIndex = 0;
+    /* ===========================
+       PRODUCT SLIDER (MANUAL)
+    ============================ */
+    const productSlides = document.querySelectorAll('.product-slide');
+    const productPrev = document.querySelector('.product-prev');
+    const productNext = document.querySelector('.product-next');
+    let productIndex = 0;
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            if (i === index) slide.classList.add('active');
+    function showProductSlide(index) {
+        productSlides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
         });
     }
 
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-            showSlide(currentIndex);
+    if (productPrev && productNext) {
+        productPrev.addEventListener('click', () => {
+            productIndex = (productIndex === 0) ? productSlides.length - 1 : productIndex - 1;
+            showProductSlide(productIndex);
         });
 
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-            showSlide(currentIndex);
+        productNext.addEventListener('click', () => {
+            productIndex = (productIndex === productSlides.length - 1) ? 0 : productIndex + 1;
+            showProductSlide(productIndex);
         });
     }
 
-    // Tampilkan slide pertama
-    showSlide(currentIndex);
-});
+    showProductSlide(productIndex);
 
+    /* ===========================
+       SERVICES SLIDER (MANUAL)
+    ============================ */
+    const serviceSlides = document.querySelectorAll('.service-slide');
+    const servicePrev = document.querySelector('.service-prev');
+    const serviceNext = document.querySelector('.service-next');
+    let serviceIndex = 0;
+
+    function showServiceSlide(index) {
+        serviceSlides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    if (servicePrev && serviceNext) {
+        servicePrev.addEventListener('click', () => {
+            serviceIndex = (serviceIndex === 0) ? serviceSlides.length - 1 : serviceIndex - 1;
+            showServiceSlide(serviceIndex);
+        });
+
+        serviceNext.addEventListener('click', () => {
+            serviceIndex = (serviceIndex === serviceSlides.length - 1) ? 0 : serviceIndex + 1;
+            showServiceSlide(serviceIndex);
+        });
+    }
+
+    showServiceSlide(serviceIndex);
+
+}); // END DOMContentLoaded
