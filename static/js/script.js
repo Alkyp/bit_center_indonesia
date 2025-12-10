@@ -230,23 +230,33 @@ document.addEventListener("DOMContentLoaded", function () {
     showServiceSlide(serviceIndex);
 
     /* ===========================
-       DROPDOWN NAVBAR
-    ============================ */
+    DROPDOWN NAVBAR (FIX)
+    ============================= */
     const dropdowns = document.querySelectorAll(".dropdown");
 
     dropdowns.forEach(drop => {
         const link = drop.querySelector("a");
         const submenu = drop.querySelector(".dropdown-menu");
 
-        // MOBILE (Klik)
+        // MOBILE: klik untuk toggle
         link.addEventListener("click", function (e) {
             if (window.innerWidth <= 900) {
                 e.preventDefault();
+
+                // Tutup dropdown lain
+                dropdowns.forEach(other => {
+                    if (other !== drop) {
+                        const otherMenu = other.querySelector(".dropdown-menu");
+                        otherMenu.classList.remove("active");
+                    }
+                });
+
+                // Toggle dropdown ini
                 submenu.classList.toggle("active");
             }
         });
 
-        // DESKTOP (Hover)
+        // DESKTOP (hover)
         drop.addEventListener("mouseenter", () => {
             if (window.innerWidth > 900) submenu.classList.add("active");
         });
@@ -254,14 +264,21 @@ document.addEventListener("DOMContentLoaded", function () {
         drop.addEventListener("mouseleave", () => {
             if (window.innerWidth > 900) submenu.classList.remove("active");
         });
+    });
 
-        // RESET saat resize
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 900) {
+    // Klik luar → tutup dropdown (mobile)
+    document.addEventListener("click", function (e) {
+        if (window.innerWidth > 900) return; // hanya mobile
+
+        dropdowns.forEach(drop => {
+            const submenu = drop.querySelector(".dropdown-menu");
+
+            if (!drop.contains(e.target)) {
                 submenu.classList.remove("active");
             }
         });
     });
+
 
     /* ===========================
        TESTIMONI MODAL
