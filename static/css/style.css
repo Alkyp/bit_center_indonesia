@@ -6,12 +6,7 @@
 /* =======================================
    RESET & BASE
 ======================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; }
 html, body {
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
@@ -32,7 +27,7 @@ html, body {
 /* =======================================
    CONTAINERS & LAYOUT
 ======================================= */
-section { padding: 100px 0; }
+section { padding: 100px 0; position: relative; z-index: 1; } /* z-index kept so sections overlay correctly with hero */
 .max-width {
     max-width: 1300px;
     padding: 0 80px;
@@ -52,7 +47,7 @@ section .title {
     padding-bottom: 20px;
     font-family: 'Ubuntu', sans-serif;
 }
-section .title::before {
+/* section .title::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -67,12 +62,11 @@ section .title::after {
     position: absolute;
     bottom: -8px;
     background: #fff;
-    color: crimson;
     font-size: 20px;
     padding: 0 5px;
     left: 50%;
     transform: translateX(-50%);
-}
+} */
 
 /* =======================================
    NAVBAR
@@ -82,7 +76,7 @@ section .title::after {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 99999;
     padding: 10px 0;
     transition: all 0.3s ease;
     background: transparent;
@@ -114,10 +108,7 @@ section .title::after {
 
 /* MENU */
 .navbar .menu { margin: 0; }
-.navbar .menu li {
-    list-style: none;
-    display: inline-block;
-}
+.navbar .menu li { list-style: none; display: inline-block; }
 .navbar .menu li a {
     display: block;
     color: #fff;
@@ -129,14 +120,15 @@ section .title::after {
 .navbar.sticky .menu li a { color: #111 !important; }
 .navbar .menu li a:hover { color: crimson; }
 
-/* MENU BUTTON (mobile) */
-.menu-btn {
+/* Mobile menu button(s) */
+.menu-btn, .menu1-btn, .hamburger {
     display: none;
-    color: #fcfcfc;
-    font-size: 23px;
     cursor: pointer;
+    z-index: 1001;
 }
-
+.menu-btn { color: #fcfcfc; font-size: 23px; }
+.menu1-btn { color: #fff; font-size: 25px; }
+.hamburger { font-size: 30px; color: crimson; }
 
 /* =======================================
    SCROLL-UP BUTTON
@@ -166,31 +158,29 @@ section .title::after {
 }
 .scroll-up-btn:hover { filter: brightness(90%); }
 
-
 /* =======================================
    HOME SECTION + SLIDESHOW
 ======================================= */
 .home {
     position: relative;
     width: 100%;
-    height: 100vh; /* full viewport height */
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     overflow: hidden;
     padding: 0;
-    background: #000; /* fallback */
+    background: #000;
 }
-
 .home-slides {
     position: relative;
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;        /* Vertikal center */
-    justify-content: flex-end;  /* Konten di kanan */
-    padding-right: 50px;        /* Jarak dari tepi kanan */
+    align-items: center;        /* vertical center */
+    justify-content: flex-end;  /* content to right */
+    padding-right: 50px;
 }
 .home-slide {
     position: absolute;
@@ -202,40 +192,19 @@ section .title::after {
     opacity: 0;
     transition: opacity 1.6s ease-in-out;
 }
-
-.home-slide.active {
-    opacity: 1;
-}
-
+.home-slide.active { opacity: 1; }
 
 .home-content {
-    position: relative; /* agar di atas slide */
+    position: relative;
     z-index: 2;
     max-width: 500px;
-    text-align: right;  /* Tulisan rata kanan */
+    text-align: right;
     color: #fff;
 }
-
-.home .text-1 {
-    font-size: 28px;
-    font-weight: 300;
-}
-
-.home .text-2 {
-    font-size: 65px;
-    font-weight: 700;
-    margin: 10px 0;
-}
-
-.home .text-3 {
-    font-size: 34px;
-    margin-bottom: 20px;
-}
-
-.home .text-3 span {
-    color: #02e0b9;
-    font-weight: 600;
-}
+.home .text-1 { font-size: 28px; font-weight: 300; }
+.home .text-2 { font-size: 65px; font-weight: 700; margin: 10px 0; }
+.home .text-3 { font-size: 34px; margin-bottom: 20px; }
+.home .text-3 span { color: #02e0b9; font-weight: 600; }
 
 .home a.btn-primary {
     display: inline-block;
@@ -247,32 +216,7 @@ section .title::after {
     color: #111;
     transition: 0.3s;
 }
-
-.home a.btn-primary:hover {
-    background: #fff;
-    color: #02e0b9;
-}
-
-/* =======================================
-   RESPONSIVE SLIDESHOW
-======================================= */
-@media (max-width: 991px) {
-    .home .text-2 { font-size: 50px; }
-    .home .text-3 { font-size: 28px; }
-}
-
-@media (max-width: 768px) {
-    .home { height: 100vh; }
-    .home .text-2 { font-size: 40px; }
-    .home .text-3 { font-size: 24px; }
-}
-
-@media (max-width: 500px) {
-    .home .text-2 { font-size: 32px; }
-    .home .text-3 { font-size: 20px; }
-    .home a.btn-primary { font-size: 16px; padding: 10px 20px; }
-}
-
+.home a.btn-primary:hover { background: #fff; color: #02e0b9; }
 
 /* =======================================
    ABOUT
@@ -310,100 +254,100 @@ section .title::after {
     border: 2px solid crimson;
     transition: all 0.3s ease;
 }
-.about .about-content .right a:hover {
-    color: crimson;
-    background: none;
-}
+.about .about-content .right a:hover { color: crimson; background: none; }
 
 /* =======================================
-   SERVICES & TEAMS
+   SERVICES & TEAMS (simple slider)
 ======================================= */
-
-.services {
+/* ===== CENTER SECTION ===== */
+.center {
     padding: 80px 0;
+    background: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
 }
 
-.services-slider {
+.center .title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.center-slider {
     position: relative;
+    width: 100%;
     max-width: 900px;
     margin: auto;
     overflow: hidden;
 }
 
-/* Slide */
-.service-slide {
+.center-slide {
     display: none;
     text-align: center;
-    animation: serviceFade 0.5s ease;
+    padding: 20px;
+    animation: fade 0.8s ease;
 }
 
-.service-slide.active {
+.center-slide.active {
     display: block;
 }
 
-/* Gambar */
-.service-img {
+.center-img {
     width: 100%;
-    max-width: 350px;
-    margin: auto;
-    border-radius: 12px;
+    max-height: 350px;
     object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
-/* Judul */
-.service-title {
-    font-size: 26px;
-    margin-top: 20px;
+.center-title {
+    font-size: 24px;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
-/* Deskripsi */
-.service-desc {
-    font-size: 17px;
-    margin: 10px 25px;
-    line-height: 1.5;
+.center-desc {
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-/* List */
-.service-list {
-    list-style: disc;
-    padding-left: 40px;
-    text-align: left;
-    margin: 20px auto;
-    max-width: 400px;
+.center-list {
+    list-style: none;
+    padding: 0;
+}
+
+.center-list li {
+    margin-bottom: 5px;
 }
 
 /* Tombol Navigasi */
-.service-prev,
-.service-next {
+.center-prev,
+.center-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
+    font-size: 28px;
+    background: rgba(0,0,0,0.3);
     color: #fff;
-    padding: 10px 18px;
     border: none;
+    padding: 10px 16px;
     cursor: pointer;
-    font-size: 26px;
     border-radius: 50%;
-    transition: 0.2s;
-    z-index: 20;
 }
 
-.service-prev:hover,
-.service-next:hover {
-    background: rgba(0,0,0,0.8);
+.center-prev { left: 10px; }
+.center-next { right: 10px; }
+
+.center-prev:hover,
+.center-next:hover {
+    background: rgba(0,0,0,0.6);
 }
 
-.service-prev { left: 10px; }
-.service-next { right: 10px; }
-
-/* Animasi fade */
-@keyframes serviceFade {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+/* Efek Fade */
+@keyframes fade {
+    from { opacity: 0.3; }
+    to   { opacity: 1; }
 }
-
 
 /* =======================================
    CONTACT
@@ -441,18 +385,12 @@ section .title::after {
     border: 2px solid crimson;
     transition: all 0.3s ease;
 }
-.right form .button-area button:hover {
-    color: crimson;
-    background: none;
-}
+.right form .button-area button:hover { color: crimson; background: none; }
 
 /* =======================================
    PARTNERSHIP / CLIENTS
 ======================================= */
-.partnership {
-    padding: 100px 0;
-    background: #f9f9f9;
-}
+.partnership { padding: 100px 0; background: #f9f9f9; }
 .partnership .section-header { text-align: center; margin-bottom: 50px; }
 .partnership .section-header h2 { font-size: 36px; font-weight: 600; margin-bottom: 10px; }
 .partnership .section-header p { font-size: 18px; color: #555; }
@@ -477,10 +415,7 @@ section .title::after {
 .logo-track img { width: 120px; margin: 0 auto; filter: grayscale(100%); opacity: 0.8; transition: 0.3s; }
 .logo-track img:hover { filter: grayscale(0); opacity: 1; }
 
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* =======================================
    MISSION & VISION
@@ -516,35 +451,20 @@ section .title::after {
     color: #333;
     text-align: justify;
 }
-.mission-vision .mv-icon {
-    width: 70px;
-    height: 70px;
-    background: crimson;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: #fff;
-    font-size: 32px;
-    margin-bottom: 20px;
-    box-shadow: 0 6px 15px rgba(220,20,60,0.35);
-}
 .mv-icon {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     background: #ff004f;
     color: #fff;
-
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 35px;
-    margin: 0 auto;  /* agar lingkarannya center di container */
+    margin: 0 auto;
 }
-.mission-title {
-    text-align: center;
-}
+.mission-title { text-align: center; }
+
 /* =======================================
    SHOPEE BUTTON
 ======================================= */
@@ -553,7 +473,7 @@ section .title::after {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background-color: transparent; /* warna Shopee */
+    background-color: transparent;
     padding: 5px 7px;
     border-radius: 8px;
     color: #fff;
@@ -561,16 +481,8 @@ section .title::after {
     text-decoration: none;
     transition: 0.3s ease;
 }
-
-.shop-btn:hover {
-    background-color: #ff5722;
-}
-
-.shop-icon {
-    width: 100px;
-    height: 100px;
-}
-
+.shop-btn:hover { background-color: #ff5722; }
+.shop-icon { width: 100px; height: 100px; }
 
 /* =======================================
    COUNTERS
@@ -582,308 +494,204 @@ section .title::after {
     flex-wrap: wrap;
     text-align: center;
 }
-.counter-box { margin: 20px; min-width: 180px; }
-.counter-box i { color: #c0392b; margin-bottom: 10px; font-size: 28px; }
-.counter { font-size: 40px; font-weight: bold; color: #2c3e50; margin-top: 10px; }
-.counter-box h3 { margin-top: 10px; font-size: 18px; color: #555; }
-
-.counter-text {
-    font-size: 24px;
-    font-weight: 600;
-    margin-left: 5px;
-}
 .counter-box {
+    margin: 20px;
+    min-width: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.counter, .counter-text {
-    display: inline-block;
-}
-.counter-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 24px;
-    font-weight: 600;
-}
-.icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    margin-bottom: 10px;
-}
-.icon2 {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-    margin-bottom: 0px;
-}
+.counter-box i { color: #c0392b; margin-bottom: 10px; font-size: 28px; }
+.counter { font-size: 40px; font-weight: bold; color: #2c3e50; margin-top: 10px; }
+.counter-box h3 { margin-top: 10px; font-size: 18px; color: #555; }
+.counter-text { font-size: 24px; font-weight: 600; margin-left: 5px; }
+.counter-wrapper { display: flex; align-items: center; gap: 5px; font-size: 24px; font-weight: 600; }
+.icon { width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; }
+.icon2 { width: 45px; height: 45px; object-fit: contain; margin-bottom: 0px; }
 
-/* ================================
-   PRODUCT SECTION
-=================================== */
+/* =======================================
+   PRODUCT SECTION & SLIDER
+======================================= */
+/* ===========================================
+   WEB 3 PRODUCT SECTION
+=========================================== */
 .product-section {
-    padding: 80px 0;
-    background: #f6f6f6;
+    width: 100%;
+    min-height: 100vh;
+    padding: 120px 40px;
+    background: radial-gradient(circle at top, #1a1a1a, #0f0f0f);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .product-title {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 40px;
+    font-size: 42px;
+    color: #fff;
     font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    background: linear-gradient(90deg, #7f5af0, #00d4ff);
+    /* -webkit-background-clip: text; */
+    color: transparent;
 }
 
-/* ================================
-   SLIDER WRAPPER
-=================================== */
+/* SLIDER */
 .product-slider {
     position: relative;
     width: 100%;
-    max-width: 1200px;
-    margin: auto;
+    max-width: 1100px;
     overflow: hidden;
 }
 
-/* ================================
-   SLIDE STYLE
-=================================== */
 .product-slide {
     display: none;
-    width: 100%;
-    animation: fade 0.5s ease;
+    animation: fade 0.8s ease-in-out;
 }
 
 .product-slide.active {
     display: block;
 }
 
-/* Animasi Fade */
-@keyframes fade {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ================================
-   CONTENT LAYOUT
-=================================== */
+/* CARD FUTURISTIK */
 .product-content {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     gap: 40px;
-    width: 100%;
-    padding: 20px 40px;
+    flex-wrap: wrap;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
 }
 
-.product-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
+/* IMAGE */
 .product-image img {
-    width: 100%;
-    height: 450px;
-    object-fit: cover; /* BIAR FULL & TIDAK TERPOTONG ANEH */
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    width: 420px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    transition: 0.4s;
 }
 
-.product-info {
-    flex: 1;
+.product-image img:hover {
+    transform: scale(1.05);
 }
 
+/* TEXT INFO */
 .product-info h3 {
+    color: #fff;
     font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-.product-info ul {
-    list-style: none;
+    margin-bottom: 14px;
 }
 
 .product-info ul li {
-    font-size: 18px;
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-}
-
-.product-info ul li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #cc0000;
-    font-weight: bold;
-}
-
-/* ============================
-   TESTIMONI SECTION
-============================ */
-.testimoni {
-    padding: 80px 0;
-    background: #f5f5f5;
-}
-
-.testimoni .title {
-    text-align: center;
-    margin-bottom: 50px;
-    font-size: 30px;
-    font-weight: 700;
-}
-
-/* CARD */
-.testimoni .carousel .card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 20px 25px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.testimoni .carousel .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-/* BOX INSIDE CARD */
-.testimoni .carousel .card .box {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;     /* center horizontal */
-    justify-content: center; /* center vertical jika tinggi besar */
-}
-
-.testimoni .carousel .card img {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid #ff004f;
-
-    display: block;
-    margin: 0 auto;   /* supaya benar-benar center */
-}
-
-
-/* NAME */
-.testimoni .carousel .card .text {
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 10px;
+    color: #ddd;
     margin-bottom: 8px;
 }
 
-/* DESCRIPTION */
-.testimoni .carousel .card p {
-    font-size: 15px;
-    color: #444;
-    line-height: 1.5;
-    padding: 0 10px;
-}
-
-/* OWL CAROUSEL FIX */
-.owl-dots {
-    margin-top: 20px !important;
-}
-
-.owl-dot span {
-    width: 12px !important;
-    height: 12px !important;
-    background: #bbb !important;
-    border-radius: 50%;
+/* BUTTON WEB3 */
+.shop-btn {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #00d4ff;
+    border-radius: 14px;
+    color: #00d4ff;
+    font-size: 18px;
     transition: 0.3s;
+    backdrop-filter: blur(6px);
 }
 
-.owl-dot.active span {
-    background: #ff004f !important;
-    width: 16px !important;
-    height: 16px !important;
+.shop-btn:hover {
+    color: #fff;
+    background: #00d4ff;
+    box-shadow: 0 0 20px #00d4ff;
 }
 
-/* ================================
-   NAVIGATION BUTTONS
-=================================== */
+/* ICON SHOPEE */
+.shop-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* BUTTON NAVIGASI */
 .product-prev,
 .product-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
-    border: none;
-    color: #fff;
     padding: 12px 18px;
-    font-size: 24px;
+    font-size: 28px;
     cursor: pointer;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #7f5af0;
     border-radius: 50%;
+    color: #fff;
+    backdrop-filter: blur(4px);
     transition: 0.3s;
-    z-index: 10; /* BIAR TIDAK TERTUTUP */
 }
 
 .product-prev:hover,
 .product-next:hover {
-    background: rgba(0,0,0,0.8);
+    background: #7f5af0;
+    box-shadow: 0 0 20px #7f5af0;
 }
 
-.product-prev {
-    left: 10px;
+.product-prev { left: 20px; }
+.product-next { right: 20px; }
+
+/* ANIMATION */
+@keyframes fade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.product-next {
-    right: 10px;
-}
 
-/* ================================
-   RESPONSIVE
-=================================== */
-@media (max-width: 900px) {
-    .product-content {
-        flex-direction: column;
-        text-align: center;
-    }
+/* =======================================
+   TESTIMONI SECTION
+======================================= */
+.testimoni { padding: 80px 0; background: #f5f5f5; }
+.testimoni .title { text-align: center; margin-bottom: 50px; font-size: 30px; font-weight: 700; }
 
-    .product-image img {
-        height: 300px;
-    }
+.testimoni .carousel .card {
+    background: #fff; border-radius: 15px; padding: 20px 25px;
+    transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+.testimoni .carousel .card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.testimoni .carousel .card .box { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.testimoni .carousel .card img {
+    height: 100px; width: 100px; object-fit: cover; border-radius: 50%; border: 4px solid #ff004f; display: block; margin: 0 auto;
+}
+.testimoni .carousel .card .text { font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 8px; }
+.testimoni .carousel .card p { font-size: 15px; color: #444; line-height: 1.5; padding: 0 10px; }
+
+/* OWL carousel dot fixes (if used) */
+.owl-dots { margin-top: 20px !important; }
+.owl-dot span {
+    width: 12px !important; height: 12px !important; background: #bbb !important; border-radius: 50%; transition: 0.3s;
+}
+.owl-dot.active span { background: #ff004f !important; width: 16px !important; height: 16px !important; }
 
 /* =======================================
    SPLASH SCREEN
 ======================================= */
 #splash {
-    display: none; /* JS will toggle to flex when shown */
-    position: fixed;
-    inset: 0;
-    background: #fff;
-    z-index: 1000000;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: none; /* toggled by JS */
+    position: fixed; inset: 0; background: #fff; z-index: 1000000;
+    justify-content: center; align-items: center; flex-direction: column;
 }
-.splash-logo { width: 150px; height: auto; }
-#splash h1 {
-    margin-top: 20px;
-    font-size: 28px;
-    color: #73134B;
-}
+.splash-logo { width: 150px; height: auto; animation: splashZoom 1.2s ease forwards; }
+#splash h1 { margin-top: 20px; font-size: 28px; color: crimson; opacity: 0; animation: splashSlideUp 1s ease forwards; animation-delay: 0.7s; }
 #splash.fade-out { opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
 
-/* Splash Animations */
-@keyframes splashZoom {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1.1); }
-    100% { opacity: 1; transform: scale(1); }
-}
-@keyframes splashSlideUp {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-#splash .splash-logo { animation: splashZoom 1.2s ease forwards; }
-#splash h1 { opacity: 0; animation: splashSlideUp 1s ease forwards; animation-delay: 0.7s; }
+@keyframes splashZoom { 0% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes splashSlideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
 
 /* =======================================
    FOOTER
@@ -898,22 +706,39 @@ footer span a { color: crimson; }
 footer span a:hover { text-decoration: underline; }
 
 /* =======================================
-   MISC: Small utilities
+   MISC: Utilities & small tweaks
 ======================================= */
 .text-center { text-align: center; }
 .mt-20 { margin-top: 20px; }
 .mb-20 { margin-bottom: 20px; }
+.column.right p { margin: 10px 0; line-height: 1.6; }
+
+/* Label for slides */
+.label {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 200px;
+}
+.label-top-left { top: 15px; left: 15px; }
+.label-top-right { top: 15px; right: 15px; }
+.label-bottom-left { bottom: 15px; left: 15px; }
+.label-bottom-right { bottom: 15px; right: 15px; }
 
 /* =======================================
    RESPONSIVE BREAKPOINTS
 ======================================= */
 @media (max-width: 991px) {
     .max-width { padding: 0 50px; }
+    .home .text-2 { font-size: 50px; }
+    .home .text-3 { font-size: 28px; }
 }
-
 @media (max-width: 947px) {
     .menu-btn { display: block; z-index: 999; }
-
+    .menu1-btn { display: block; }
     .navbar .menu {
         position: fixed;
         height: 100vh;
@@ -932,62 +757,13 @@ footer span a:hover { text-decoration: underline; }
 
     /* ABOUT stack for smaller screens */
     .about .about-content { flex-direction: column; }
-    .about .about-content .left,
-    .about .about-content .right { width: 100%; text-align: center; }
+    .about .about-content .left, .about .about-content .right { width: 100%; text-align: center; }
     .about .about-content .left img {
-        height: auto;
-        width: 100%;
-        max-width: 350px;
-        margin-bottom: 20px;
+        height: auto; width: 100%; max-width: 350px; margin-bottom: 20px;
     }
 }
-
-@media (max-width: 768px) {
-    .max-width { padding: 0 30px; }
-    .home { background-attachment: scroll; min-height: 100vh; }
-    .counters .container { flex-direction: column; }
-}
-
-@media (max-width: 690px) { .max-width { padding: 0 23px; } }
-
-@media (max-width: 500px) {
-    .contact .right form .fields { flex-direction: column; }
-    .product-image img { width: 230px; }
-}
-
-.menu1-btn {
-    color: #fff;
-    font-size: 25px;
-    cursor: pointer;
-    z-index: 1001;
-    display: none;
-}
-
-@media (max-width: 947px) {
-    .menu1-btn {
-        display: block;
-    }
-}
-
-.navbar {
-    position: fixed;
-    width: 100%;
-    z-index: 99999 !important;
-}
-
-.hamburger {
-    display: none;
-    font-size: 30px;
-    color: crimson;
-    cursor: pointer;
-    z-index: 999999;
-}
-
 @media (max-width: 900px) {
-    .hamburger {
-        display: block;
-    }
-
+    .hamburger { display: block; }
     .navbar .menu {
         position: fixed;
         top: 0;
@@ -999,92 +775,131 @@ footer span a:hover { text-decoration: underline; }
         transition: 0.3s ease;
         z-index: 99998;
     }
-
-    .navbar .menu.active {
-        right: 0;
-    }
-
-    .navbar .menu li {
-        display: block;
-        margin: 25px;
-    }
+    .navbar .menu.active { right: 0; }
+    .navbar .menu li { display: block; margin: 25px; }
+}
+@media (max-width: 768px) {
+    .max-width { padding: 0 30px; }
+    .home { background-attachment: scroll; min-height: 100vh; }
+    .counters .container { flex-direction: column; }
+    .home .text-2 { font-size: 40px; }
+    .home .text-3 { font-size: 24px; }
+}
+@media (max-width: 690px) { .max-width { padding: 0 23px; } }
+@media (max-width: 500px) {
+    .contact .right form .fields { flex-direction: column; }
+    .product-image img { width: 230px; height: auto; }
+    .home .text-2 { font-size: 32px; }
+    .home a.btn-primary { font-size: 16px; padding: 10px 20px; }
 }
 
-/* JANGAN HAPUS INI — overlay home slide */
-.home-slides, .home, section {
+/* =======================================
+   Dropdown Menu
+======================================= */
+/* ---- Dropdown Wrapper ---- */
+.menu .dropdown {
     position: relative;
-    z-index: 1;
 }
 
-/* Ini untuk paragraf yaaaa */
-.column.right p {
-    margin: 10px 0; /* atas 10px, bawah 10px */
-    line-height: 1.6;
-}
-/* product uji coba slide */
-.product-wrapper {
-    position: relative;
-    max-width: 900px;   /* Lebar slide lebih besar */
-    width: 100%;
-    margin: 40px auto;  /* Beri jarak dari judul */
-    overflow: hidden;
-    border-radius: 15px;
+/* ---- Button utama dropdown ---- */
+.menu .dropdown-btn {
+    cursor: pointer;
 }
 
-.product-slide {
+/* ---- Dropdown Content ---- */
+.menu .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
     display: none;
-    position: relative;
+    list-style: none;
+    padding: 10px 0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 999;
 }
 
-.product-slide.active {
+.menu .dropdown-menu li a {
+    padding: 10px 20px;
+    display: block;
+    white-space: nowrap;
+    color: #333;
+}
+
+.menu .dropdown-menu li a:hover {
+    background: #f0f0f0;
+}
+
+/* ---- Show on hover ---- */
+.menu .dropdown:hover .dropdown-menu {
     display: block;
 }
 
-.product-image img {
+/* ===== MODAL TESTIMONI ===== */
+.testimoni-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
     width: 100%;
-    height: auto;
-    border-radius: 15px;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-/* Label penjelasan */
-.label {
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    max-width: 200px;
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.25s ease;
 }
 
-.label-top-left { top: 15px; left: 15px; }
-.label-top-right { top: 15px; right: 15px; }
-.label-bottom-left { bottom: 15px; left: 15px; }
-.label-bottom-right { bottom: 15px; right: 15px; }
-
-/* Tombol navigasi */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    cursor: pointer;
+.modal-content img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
     border-radius: 50%;
-    font-size: 25px;
-    z-index: 10; /* pastikan di atas slide */
-    transition: background 0.3s;
+    margin-bottom: 15px;
 }
 
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+.modal-content h3 {
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 600;
 }
 
-.prev { left: 20px; }
-.next { right: 20px; }
+.modal-content p {
+    font-size: 16px;
+    margin-top: 10px;
+    line-height: 1.5;
+}
 
-/* =======================================
-   END OF FILE
-======================================= */
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 32px;
+    color: #222;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

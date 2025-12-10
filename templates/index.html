@@ -45,15 +45,31 @@
 
             <ul class="menu">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#counters">Benefits</a></li>
-                <li><a href="#mission">Mission & Vision</a></li>
-                <li><a href="#product">Product</a></li>
-                <li><a href="#services">Plantation & Processing Center</a></li>
-                <li><a href="#testimoni">Testimoni</a></li>
-                <li><a href="#partnership">Partnership</a></li>
+
+                <!-- DROPDOWN COMPANY -->
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-btn">Company ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#counters">Benefits</a></li>
+                        <li><a href="#mission">Mission & Vision</a></li>
+                        <li><a href="#product">Product</a></li>
+                    </ul>
+                </li>
+                <li><a href="#center">Center</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-btn">Client ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#testimoni">Testimoni</a></li>
+                        <li><a href="#partnership">Partnership</a></li>
+                    </ul>
+                </li>
+
+                <!-- Menu lain tetap -->
+                
                 <li><a href="#contact">Contact</a></li>
             </ul>
+
 
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -212,20 +228,24 @@
             <!-- Slide 1 -->
             <div class="product-slide active">
                 <div class="product-content">
+
                     <div class="product-image">
-                        <img src="{{ url_for('static', filename='img/aerial-view-fresh-radish-white-background.jpg') }}" alt="Product 1">
+                        <img src="{{ url_for('static', filename='img/aerial-view-fresh-radish-white-background.jpg') }}" 
+                            alt="Product 1">
                     </div>
+
                     <div class="product-info">
                         <h3>Beets Powder</h3>
-                        <ul>
+
+                        <ul class="product-benefits">
                             <li>Mengandung A – Manfaat A.</li>
                             <li>Mengandung B – Manfaat B.</li>
                             <li>Mengandung C – Manfaat C.</li>
                             <li>Mengandung D – Manfaat D.</li>
                         </ul>
-                        <h3> </h3>
-                        <h4>Dapat di Beli melalui</h4>
-                        <a href="https://shopee.co.id/Moera-Beets-Powder-Herbifams-Serbuk-Buah-Bit-100-gram-Buah-Bit-Premium-Bubuk-Bit-Herbifams-Original-100--i.792664506.23536936555" 
+
+                        <h4 class="buy-title">Dapat di Beli melalui</h4>
+                        <a href="https://shopee.co.id/Moera-Beets-Powder-Herbifams-Serbuk-Buah-Bit-100-gram-Buah-Bit-Premium-Bubuk-Bit-Herbifams-Original-100--i.792664506.23536936555"
                         target="_blank" 
                         class="shop-btn">
                             <img src="{{ url_for('static', filename='img/shopee.png') }}" class="shop-icon">
@@ -238,22 +258,27 @@
             <!-- Slide 2 -->
             <div class="product-slide">
                 <div class="product-content">
+
                     <div class="product-image">
-                        <img src="{{ url_for('static', filename='img/Beetoot-100g-v3-FBPouch-F_1800x1800.jpg') }}" alt="Product 2">
+                        <img src="{{ url_for('static', filename='img/Beetoot-100g-v3-FBPouch-F_1800x1800.jpg') }}" 
+                            alt="Product 2">
                     </div>
+
                     <div class="product-info">
                         <h3>Product 2</h3>
-                        <ul>
+
+                        <ul class="product-benefits">
                             <li>Mengandung X – Manfaat X.</li>
                             <li>Mengandung Y – Manfaat Y.</li>
                             <li>Mengandung Z – Manfaat Z.</li>
                             <li>Mengandung W – Manfaat W.</li>
                         </ul>
+
                     </div>
                 </div>
             </div>
 
-            <!-- Navigasi -->
+            <!-- Navigation -->
             <button class="product-prev">&#10094;</button>
             <button class="product-next">&#10095;</button>
 
@@ -261,21 +286,22 @@
     </section>
 
 
-    <!-- services section start -->
-    <section class="services" id="services">
+
+    <!-- center section start -->
+    <section class="center" id="center">
         <div class="max-width">
             <h2 class="title">Plantation & Processing Center</h2>
 
-            <div class="services-slider">
+            <div class="center-slider">
 
                 <!-- Slide 1 -->
-                <div class="service-slide active">
-                    <img src="{{ url_for('static', filename='img/istockphoto-1181480376-1024x1024.jpg') }}" class="service-img">
-                    <h3 class="service-title">Plantation Area</h3>
-                    <p class="service-desc">
+                <div class="center-slide active">
+                    <img src="{{ url_for('static', filename='img/istockphoto-1181480376-1024x1024.jpg') }}" class="center-img">
+                    <h3 class="center-title">Plantation Area</h3>
+                    <p class="center-desc">
                         BCI bekerja sama dengan jaringan petani di berbagai wilayah yang telah diseleksi berdasarkan kesesuaian tanah dan cuaca untuk tanaman bit.
                     </p>
-                    <ul class="service-list">
+                    <ul class="center-list">
                         <li>Bandungan – Jawa Tengah</li>
                         <li>Tawangmangu – Jawa Tengah</li>
                         <li>Lembang – Jawa Barat</li>
@@ -283,13 +309,11 @@
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="service-slide">
-                    <img src="{{ url_for('static', filename='img/another-image.jpg') }}" class="service-img">
-                    <h3 class="service-title">Area</h3>
-                    <p class="service-desc">
-                        Di area ini, kami menerapkan:
-                    </p>
-                    <ul class="service-list">
+                <div class="center-slide">
+                    <img src="{{ url_for('static', filename='img/another-image.jpg') }}" class="center-img">
+                    <h3 class="center-title">Area</h3>
+                    <p class="center-desc">Di area ini, kami menerapkan:</p>
+                    <ul class="center-list">
                         <li>Budidaya organik tanpa pestisida kimia</li>
                         <li>Sistem irigasi modern untuk efisiensi air</li>
                         <li>Rotasi tanaman untuk menjaga kesuburan tanah</li>
@@ -297,21 +321,21 @@
                 </div>
 
                 <!-- Slide 3 -->
-                <div class="service-slide">
-                    <img src="{{ url_for('static', filename='img/another-image-2.jpg') }}" class="service-img">
-                    <h3 class="service-title">Apps Design</h3>
-                    <p class="service-desc">
+                <div class="center-slide">
+                    <img src="{{ url_for('static', filename='img/another-image-2.jpg') }}" class="center-img">
+                    <h3 class="center-title">Processing</h3>
+                    <p class="center-desc">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quia sunt, quasi quo illo enim.
                     </p>
                 </div>
 
                 <!-- Navigasi -->
-                <button class="service-prev">&#10094;</button>
-                <button class="service-next">&#10095;</button>
-
+                <button class="center-prev">&#10094;</button>
+                <button class="center-next">&#10095;</button>
             </div>
         </div>
     </section>
+
 
 
     <!-- testimoni section start -->
@@ -328,9 +352,9 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <img src="images/profile-2.jpeg" alt="">
-                        <div class="text">Someone name</div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="{{ url_for('static', filename='img/Untitled.png') }}" alt="">
+                        <div class="text">Adolf Hitler</div>
+                        <p>Ich Liebe Dich.</p>
                     </div>
                 </div>
                 <div class="card">
@@ -358,6 +382,15 @@
         </div>
     </section>
 
+    <!-- Modal Testimoni -->
+    <div class="testimoni-modal" id="testimoniModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img id="modalImg" src="" alt="">
+            <h3 id="modalName"></h3>
+            <p id="modalText"></p>
+        </div>
+    </div>
 
         <!-- clients section start -->
     <section class="partnership" id="partnership">

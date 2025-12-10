@@ -230,4 +230,91 @@ document.addEventListener("DOMContentLoaded", function () {
 
     showServiceSlide(serviceIndex);
 
+    /* ===========================
+       NAVBAR DROPDOWN (Desktop & Mobile)
+    ============================ */
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach(drop => {
+        const link = drop.querySelector("a");
+        const submenu = drop.querySelector(".dropdown-menu");
+
+        // Mobile – klik buka
+        link.addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                submenu.classList.toggle("active");
+            }
+        });
+
+        // Desktop – hover buka
+        drop.addEventListener("mouseenter", () => {
+            if (window.innerWidth > 768) submenu.classList.add("active");
+        });
+
+        drop.addEventListener("mouseleave", () => {
+            if (window.innerWidth > 768) submenu.classList.remove("active");
+        });
+    });
+    /* ===========================
+    SLIDER CENTER
+    =========================== */
+    const slides = document.querySelectorAll(".center-slide");
+    const prevBtn = document.querySelector(".center-prev");
+    const nextBtn = document.querySelector(".center-next");
+
+    let index = 0;
+
+    function showSlide(i) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        slides[i].classList.add("active");
+    }
+
+    prevBtn.addEventListener("click", () => {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    });
+
+    showSlide(index);
+
+    /* ===========================
+    TESTIMONI MODAL
+    =========================== */
+    const cards = document.querySelectorAll(".testimoni .card");
+    const modal = document.getElementById("testimoniModal");
+    const modalImg = document.getElementById("modalImg");
+    const modalName = document.getElementById("modalName");
+    const modalText = document.getElementById("modalText");
+    const modalClose = document.querySelector(".modal-close");
+
+    cards.forEach(card => {
+        card.addEventListener("click", () => {
+            const img = card.querySelector("img").src;
+            const name = card.querySelector(".text").innerText;
+            const text = card.querySelector("p").innerText;
+
+            modalImg.src = img;
+            modalName.innerText = name;
+            modalText.innerText = text;
+
+            modal.style.display = "flex";
+        });
+    });
+
+    modalClose.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    });
+
+
+
+
 }); // END DOMContentLoaded
