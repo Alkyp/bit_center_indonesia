@@ -508,6 +508,8 @@ section .title::after {
 .counter-wrapper { display: flex; align-items: center; gap: 5px; font-size: 24px; font-weight: 600; }
 .icon { width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; }
 .icon2 { width: 45px; height: 45px; object-fit: contain; margin-bottom: 0px; }
+h5.product-title {color: #fff; }
+
 
 /* =======================================
    PRODUCT SECTION & SLIDER
@@ -903,3 +905,18 @@ footer span a:hover { text-decoration: underline; }
         transform: scale(1);
     }
 }
+
+/* Menyembunyikan dropdown secara default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+/* Menampilkan dropdown ketika aktif */
+.dropdown-menu.active {
+    display: block;
+}
+

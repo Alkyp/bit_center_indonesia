@@ -1,5 +1,5 @@
 /* ============================================================
-   SEMUA SCRIPT DIJALANKAN SAAT DOM SUDAH SIAP
+   SEMUA SCRIPT DIJALANKAN SAAT DOM SIAP
 ============================================================ */
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             setTimeout(() => {
                 splash.style.display = "none";
-            }, 3000);
+            }, 4000);
 
         } else {
             splash.style.display = "none";
@@ -37,24 +37,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ===========================
-       MENU TOGGLE MOBILE
+       HAMBURGER MENU (FIXED)
     ============================ */
-    const menuBtn = document.querySelector(".menu-btn");
+    const hamburger = document.querySelector(".hamburger");
     const menu = document.querySelector(".navbar .menu");
 
-    if (menuBtn) {
-        menuBtn.addEventListener("click", () => {
+    if (hamburger && menu) {
+        hamburger.addEventListener("click", () => {
             menu.classList.toggle("active");
-            menuBtn.classList.toggle("active");
+            hamburger.classList.toggle("active");
+        });
+
+        // Tutup menu saat klik link, kecuali dropdown button
+        document.querySelectorAll(".navbar .menu li a").forEach(link => {
+            link.addEventListener("click", (e) => {
+
+                // Jika link adalah dropdown parent (punya submenu)
+                const parentLi = link.parentElement;
+                if (parentLi.classList.contains("dropdown")) {
+                    e.preventDefault(); // Jangan tutup navbar
+                    return;
+                }
+
+                // Jika link biasa → tutup navbar
+                menu.classList.remove("active");
+                hamburger.classList.remove("active");
+            });
         });
     }
-
-    document.querySelectorAll(".navbar .menu li a").forEach(link => {
-        link.addEventListener("click", () => {
-            menu.classList.remove("active");
-            if (menuBtn) menuBtn.classList.remove("active");
-        });
-    });
 
     /* ===========================
        SCROLL-UP BUTTON
@@ -67,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ===========================
-       COUNTER ANIMATION
+       COUNTER
     ============================ */
     const counters = document.querySelectorAll(".counter");
     counters.forEach(counter => {
@@ -120,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ===========================
-       LOGO CAROUSEL AUTO SCROLL
+       LOGO CAROUSEL
     ============================ */
     const track = document.querySelector(".logo-track");
     if (track) {
@@ -151,12 +161,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ============================ */
     const homeSlides = document.querySelectorAll(".home-slide");
     if (homeSlides.length > 0) {
-        let homeIndex = 0;
+        let i = 0;
 
         function showHomeSlides() {
             homeSlides.forEach(slide => slide.classList.remove("active"));
-            homeIndex = (homeIndex + 1) % homeSlides.length;
-            homeSlides[homeIndex].classList.add("active");
+            i = (i + 1) % homeSlides.length;
+            homeSlides[i].classList.add("active");
             setTimeout(showHomeSlides, 4000);
         }
 
@@ -164,18 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ===========================
-       HAMBURGER (jQuery)
-    ============================ */
-    $(".hamburger").click(function () {
-        $(".navbar .menu").toggleClass("active");
-    });
-
-    $(".navbar .menu li a").click(function () {
-        $(".navbar .menu").removeClass("active");
-    });
-
-    /* ===========================
-       PRODUCT SLIDER (MANUAL)
+       PRODUCT SLIDER
     ============================ */
     const productSlides = document.querySelectorAll('.product-slide');
     const productPrev = document.querySelector('.product-prev');
@@ -203,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     showProductSlide(productIndex);
 
     /* ===========================
-       SERVICES SLIDER (MANUAL)
+       SERVICES SLIDER
     ============================ */
     const serviceSlides = document.querySelectorAll('.service-slide');
     const servicePrev = document.querySelector('.service-prev');
@@ -211,9 +210,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let serviceIndex = 0;
 
     function showServiceSlide(index) {
-        serviceSlides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
+        serviceSlides.forEach((slide, i) =>
+            slide.classList.toggle('active', i === index)
+        );
     }
 
     if (servicePrev && serviceNext) {
@@ -231,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
     showServiceSlide(serviceIndex);
 
     /* ===========================
-       NAVBAR DROPDOWN (Desktop & Mobile)
+       DROPDOWN NAVBAR
     ============================ */
     const dropdowns = document.querySelectorAll(".dropdown");
 
@@ -239,52 +238,34 @@ document.addEventListener("DOMContentLoaded", function () {
         const link = drop.querySelector("a");
         const submenu = drop.querySelector(".dropdown-menu");
 
-        // Mobile – klik buka
+        // MOBILE (Klik)
         link.addEventListener("click", function (e) {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 900) {
                 e.preventDefault();
                 submenu.classList.toggle("active");
             }
         });
 
-        // Desktop – hover buka
+        // DESKTOP (Hover)
         drop.addEventListener("mouseenter", () => {
-            if (window.innerWidth > 768) submenu.classList.add("active");
+            if (window.innerWidth > 900) submenu.classList.add("active");
         });
 
         drop.addEventListener("mouseleave", () => {
-            if (window.innerWidth > 768) submenu.classList.remove("active");
+            if (window.innerWidth > 900) submenu.classList.remove("active");
+        });
+
+        // RESET saat resize
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900) {
+                submenu.classList.remove("active");
+            }
         });
     });
-    /* ===========================
-    SLIDER CENTER
-    =========================== */
-    const slides = document.querySelectorAll(".center-slide");
-    const prevBtn = document.querySelector(".center-prev");
-    const nextBtn = document.querySelector(".center-next");
-
-    let index = 0;
-
-    function showSlide(i) {
-        slides.forEach(slide => slide.classList.remove("active"));
-        slides[i].classList.add("active");
-    }
-
-    prevBtn.addEventListener("click", () => {
-        index = (index - 1 + slides.length) % slides.length;
-        showSlide(index);
-    });
-
-    nextBtn.addEventListener("click", () => {
-        index = (index + 1) % slides.length;
-        showSlide(index);
-    });
-
-    showSlide(index);
 
     /* ===========================
-    TESTIMONI MODAL
-    =========================== */
+       TESTIMONI MODAL
+    ============================ */
     const cards = document.querySelectorAll(".testimoni .card");
     const modal = document.getElementById("testimoniModal");
     const modalImg = document.getElementById("modalImg");
@@ -292,29 +273,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalText = document.getElementById("modalText");
     const modalClose = document.querySelector(".modal-close");
 
-    cards.forEach(card => {
-        card.addEventListener("click", () => {
-            const img = card.querySelector("img").src;
-            const name = card.querySelector(".text").innerText;
-            const text = card.querySelector("p").innerText;
+    if (cards && modal && modalClose) {
+        cards.forEach(card => {
+            card.addEventListener("click", () => {
+                modalImg.src = card.querySelector("img").src;
+                modalName.innerText = card.querySelector(".text").innerText;
+                modalText.innerText = card.querySelector("p").innerText;
 
-            modalImg.src = img;
-            modalName.innerText = name;
-            modalText.innerText = text;
-
-            modal.style.display = "flex";
+                modal.style.display = "flex";
+            });
         });
-    });
 
-    modalClose.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
+        modalClose.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
 
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none";
-    });
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.style.display = "none";
+        });
+    }
 
-
-
-
-}); // END DOMContentLoaded
+}); // END DOM
