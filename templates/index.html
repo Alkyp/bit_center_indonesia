@@ -6,19 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bit Center Indonesia</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
-    <!-- Owl Carousel JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 
 
 </head>
@@ -104,9 +103,7 @@
 
             <div class="about-image">
                 <div class="about-slider">
-                    <img src="{{ url_for('static', filename='img/IMG_8637-min.jpg') }}" class="active" alt="">
-                    <img src="{{ url_for('static', filename='img/compressed_IMG_0106.jpg') }}" alt="">
-                    <img src="{{ url_for('static', filename='img/about3.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/compressed_IMG_0106.jpg') }}" class="active" alt="">
                 </div>
             </div>
 
@@ -240,163 +237,198 @@
     <!-- product section start -->
     <section class="product-section" id="product">
         <h2 class="title">Our Product</h2>
+
         <div class="product-container">
-            <div class="product">
 
-                <div class="slides-wrapper" id="slides">
-                    <!-- SLIDE 1 -->
-                    <div class="slide">
-                        <img src="{{ url_for('static', filename='img/Beetoot-100g-v3-FBPouch-F_1800x1800.jpg') }}" class="product-image">
-                        <div class="product-info">
-                            <h2>Beet Powder</h2>
-                            <p>Deskripsi singkat produk 1.</p>
-                            <strong>Rp 500.000</strong>
-                            <div class="buy-section">
-                                <a href="https://shopee.co.id/toko_kamu" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/shopee.png') }}"
-                                        class="shop-logo"
-                                        alt="Shopee">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 2 -->
-                    <div class="slide">
-                        <img src="https://via.placeholder.com/400x400/ff5555" class="product-image">
-                        <div class="product-info">
-                            <h2>Produk 2</h2>
-                            <p>Deskripsi singkat produk 2.</p>
-                            <strong>Rp 750.000</strong>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 3 -->
-                    <div class="slide">
-                        <img src="https://via.placeholder.com/400x400/5555ff" class="product-image">
-                        <div class="product-info">
-                            <h2>Produk 3</h2>
-                            <p>Deskripsi singkat produk 3.</p>
-                            <strong>Rp 1.200.000</strong>
-                        </div>
-                    </div>
+            <!-- Product 1 -->
+            <div class="card">
+                <div class="imgBx">
+                    <img src="{{ url_for('static', filename='img/Beetoot-100g-v3-FBPouch-F_1800x1800.jpg') }}" alt="Beet Powder">
                 </div>
 
-                <!-- BUTTON SLIDER -->
-                <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-                <button class="next" onclick="moveSlide(1)">&#10095;</button>
+                <div class="details">
+                    <h3 style="text-align: center;">
+                        Beet Powder <br>
+                        <span>Functional Food</span>
+                    </h3>
 
+                    <h4>Product Details</h4>
+                    <p>
+                        Beetroot powder murni, kaya antioksidan, mendukung kesehatan jantung dan stamina.
+                    </p>
+                    <div class="marketplace">
+                        <a href="https://shopee.co.id/toko_kamu"><img src="{{ url_for('static', filename='img/shopee.png') }}"class="shop-logo" alt="Shopee">
+                        <a href="#"><img src="tokopedia.png" class="shop-logo"></a>
+                        <a href="#"><img src="wa.png" class="shop-logo"></a>
+                    </div>
+                    <div class="group">
+                        <h2><sup>Rp</sup>500<small>.000</small></h2>
+                    </div>
+                </div>
             </div>
+
+            <!-- Product 2 -->
+            <div class="card">
+                <div class="imgBx">
+                    <img src="{{ url_for('static', filename='img/beet-chips.jpg') }}" alt="Beet Chips">
+                </div>
+
+                <div class="details">
+                    <h3 style="text-align: center;">
+                        Beet Chips <br>
+                        <span>Healthy Snack</span>
+                    </h3>
+
+                    <h4>Product Details</h4>
+                    <p>
+                        Keripik bit rendah minyak, renyah, dan kaya nutrisi alami.
+                    </p>
+
+                    <h4>Net Weight</h4>
+
+                    <div class="group">
+                        <h2><sup>Rp</sup>75<small>.000</small></h2>
+                        <a href="#">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="card">
+                <div class="imgBx">
+                    <img src="{{ url_for('static', filename='img/beet-extract.jpg') }}" alt="Beet Extract">
+                </div>
+
+                <div class="details">
+                    <h3 style="text-align: center;">
+                        Beet Extract <br>
+                        <span>Nutraceutical</span>
+                    </h3>
+                    <h4>Product Details</h4>
+                    <p>
+                        Konsentrat ekstrak bit untuk bahan minuman fungsional dan suplemen.
+                    </p>
+                    <h4>Packaging</h4>
+                    <div class="group">
+                        <h2><sup>Rp</sup>1.200<small>.000</small></h2>
+                        <a href="#">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
-
-
-
+    <!-- product section end -->
 
     <!-- center section start -->
     <section class="center" id="center">
         <div class="max-width">
             <h2 class="title">Plantation & Processing Center</h2>
 
-            <div class="center-slider">
+            <div class="expanding-container">
 
-                <!-- Slide 1 -->
-                <div class="center-slide active">
-                    <img src="{{ url_for('static', filename='img/istockphoto-1181480376-1024x1024.jpg') }}" class="center-img">
-                    <h3 class="center-title">Plantation Area</h3>
-                    <p class="center-desc">
-                        BCI bekerja sama dengan jaringan petani di berbagai wilayah yang telah diseleksi berdasarkan kesesuaian tanah dan cuaca untuk tanaman bit.
-                    </p>
-                    <ul class="center-list">
-                        <li>Bandungan – Jawa Tengah</li>
-                        <li>Tawangmangu – Jawa Tengah</li>
-                        <li>Lembang – Jawa Barat</li>
-                    </ul>
+                <div class="panel active"
+                    style="background-image: url('{{ url_for('static', filename='img/istockphoto-1181480376-1024x1024.jpg') }}');">
+                    <h3>Plantation Area</h3>
                 </div>
 
-                <!-- Slide 2 -->
-                <div class="center-slide">
-                    <img src="{{ url_for('static', filename='img/another-image.jpg') }}" class="center-img">
-                    <h3 class="center-title">Area</h3>
-                    <p class="center-desc">Di area ini, kami menerapkan:</p>
-                    <ul class="center-list">
-                        <li>Budidaya organik tanpa pestisida kimia</li>
-                        <li>Sistem irigasi modern untuk efisiensi air</li>
-                        <li>Rotasi tanaman untuk menjaga kesuburan tanah</li>
-                    </ul>
+                <div class="panel"
+                    style="background-image: url('{{ url_for('static', filename='img/another-image.jpg') }}');">
+                    <h3>Organic Farming</h3>
                 </div>
 
-                <!-- Slide 3 -->
-                <div class="center-slide">
-                    <img src="{{ url_for('static', filename='img/another-image-2.jpg') }}" class="center-img">
-                    <h3 class="center-title">Processing</h3>
-                    <p class="center-desc">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quia sunt, quasi quo illo enim.
-                    </p>
+                <div class="panel"
+                    style="background-image: url('{{ url_for('static', filename='img/another-image-2.jpg') }}');">
+                    <h3>Processing Center</h3>
                 </div>
 
-                <!-- Navigasi -->
-                <button class="center-prev">&#10094;</button>
-                <button class="center-next">&#10095;</button>
+                <div class="panel"
+                    style="background-image: url('{{ url_for('static', filename='img/flat-lay-beets-table.jpg') }}');">
+                    <h3>Quality Control</h3>
+                </div>
+
+                <div class="panel"
+                    style="background-image: url('{{ url_for('static', filename='img/twobeets (1).png') }}');">
+                    <h3>Distribution</h3>
+                </div>
+
             </div>
         </div>
     </section>
+    <!-- center section end -->
 
 
-
-    <!-- testimoni section start -->
+    <!-- ==============================
+        TESTIMONI SECTION
+    ================================= -->
     <section class="testimoni" id="testimoni">
         <div class="max-width">
-            <h2 class="title">Testimoni atau peneliti</h2>
+            <h2 class="title">Testimoni atau Peneliti</h2>
+
             <div class="carousel owl-carousel">
-                <div class="card">
+
+                <!-- Testimoni 1 -->
+                <div class="testimoni-card">
                     <div class="box">
-                        <img src="{{ url_for('static', filename='img/Logo beets crimson.png') }}" alt="">
-                        <div class="text">Someone name</div>
+                        <img src="{{ url_for('static', filename='img/Logo beets crimson.png') }}" alt="Testimoni 1">
+                        <div class="text">Someone Name</div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                 </div>
-                <div class="card">
+
+                <!-- Testimoni 2 -->
+                <div class="testimoni-card">
                     <div class="box">
-                        <img src="{{ url_for('static', filename='img/WhatsApp Image 2025-12-15 at 11.38.34.jpeg') }}" alt="">
-                        <div class="text">Aldianto Dickyu Septian</div>
+                        <img src="{{ url_for('static', filename='img/profile-2jpeg') }}" alt="Testimoni 2>
+                        <div class="text">Someone name</div>
                         <p>Ich Liebe Dich.</p>
                     </div>
                 </div>
-                <div class="card">
+
+                <!-- Testimoni 3 -->
+                <div class="testimoni-card">
                     <div class="box">
-                        <img src="images/profile-3.jpeg" alt="">
-                        <div class="text">Someone name</div>
+                        <img src="{{ url_for('static', filename='img/profile-3.jpeg') }}" alt="Testimoni 3">
+                        <div class="text">Someone Name</div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                 </div>
-                <div class="card">
+
+                <!-- Testimoni 4 -->
+                <div class="testimoni-card">
                     <div class="box">
-                        <img src="images/profile-4.jpeg" alt="">
-                        <div class="text">Someone name</div>
+                        <img src="{{ url_for('static', filename='img/profile-4.jpeg') }}" alt="Testimoni 4">
+                        <div class="text">Someone Name</div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                 </div>
-                <div class="card">
+
+                <!-- Testimoni 5 -->
+                <div class="testimoni-card">
                     <div class="box">
-                        <img src="images/profile-5.jpeg" alt="">
-                        <div class="text">Someone name</div>
+                        <img src="{{ url_for('static', filename='img/profile-5.jpeg') }}" alt="Testimoni 5">
+                        <div class="text">Someone Name</div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Modal Testimoni -->
+
+    <!-- ==============================
+        MODAL TESTIMONI
+    ================================= -->
     <div class="testimoni-modal" id="testimoniModal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <img id="modalImg" src="" alt="">
+            <img id="modalImg" src="" alt="Foto Testimoni">
             <h3 id="modalName"></h3>
             <p id="modalText"></p>
         </div>
     </div>
+
 
         <!-- clients section start -->
     <section class="partnership" id="partnership">

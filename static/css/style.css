@@ -335,94 +335,82 @@ section .title::after {
    SERVICES & TEAMS (simple slider)
 ======================================= */
 /* ===== CENTER SECTION ===== */
+/* =======================================
+   CENTER SECTION – EXPANDING CARDS
+======================================= */
+
 .center {
-    padding: 80px 0;
+    padding: 100px 0;
     background: #f5f5f5;
-    font-family: 'Poppins', sans-serif;
 }
 
-.center .title {
-    text-align: center;
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 80px;
-}
-
-.center-slider {
-    position: relative;
+.center .expanding-container {
+    display: flex;
     width: 100%;
-    max-width: 900px;
-    margin: auto;
+    height: 420px;
+    gap: 16px;
+}
+
+.center .panel {
+    flex: 0.7;
+    border-radius: 30px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    position: relative;
+    transition: flex 0.7s ease;
     overflow: hidden;
 }
 
-.center-slide {
-    display: none;
-    text-align: center;
-    padding: 20px;
-    animation: fade 0.8s ease;
-}
-
-.center-slide.active {
-    display: block;
-}
-
-.center-img {
-    width: 100%;
-    max-height: 350px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.center-title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.center-desc {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.center-list {
-    list-style: none;
-    padding: 0;
-}
-
-.center-list li {
-    margin-bottom: 5px;
-}
-
-/* Tombol Navigasi */
-.center-prev,
-.center-next {
+/* overlay gelap */
+.center .panel::after {
+    content: "";
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 28px;
-    background: rgba(0,0,0,0.3);
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+/* judul */
+.center .panel h3 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
     color: #fff;
-    border: none;
-    padding: 10px 16px;
-    cursor: pointer;
-    border-radius: 50%;
+    font-size: 22px;
+    font-weight: 600;
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.3s ease 0.4s;
 }
 
-.center-prev { left: 10px; }
-.center-next { right: 10px; }
-
-.center-prev:hover,
-.center-next:hover {
-    background: rgba(0,0,0,0.6);
+.center .panel.active {
+    flex: 5;
 }
 
-/* Efek Fade */
-@keyframes fade {
-    from { opacity: 0.3; }
-    to   { opacity: 1; }
+.center .panel.active h3 {
+    opacity: 1;
 }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .center .expanding-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .center .panel {
+        height: 220px;
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .center .panel:nth-child(4),
+    .center .panel:nth-child(5) {
+        display: none;
+    }
+}
+
 
 /* =======================================
    CONTACT
@@ -589,181 +577,382 @@ h5.product-title {color: #fff; }
 /* =======================================
    PRODUCT SECTION & SLIDER
 ======================================= */
+/* =======================================
+   PRODUCT SECTION – SLIDING CARDS
+======================================= */
+
 .product-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 60px 40px;
+}
+
+/* ===== CARD ===== */
+.card {
+    position: relative;
+    width: 300px;
+    height: 380px;
+    background: transparent;
+    display: flex;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+}
+
+.card:hover {
+    width: 600px;
+    z-index: 100;
+}
+
+/* ===== IMAGE ===== */
+.card .imgBx {
+    min-width: 300px;
+    height: 100%;
+    background: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 10px;
-}
-
-.product {
-    position: relative;
-    width: 100%;
-    max-width: 1200px; /* sebelumnya 900px */
-    background-color: white;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    overflow: hidden;
-    border-radius: 14px;
-    border: 1px solid rgba(0, 0, 0, 0.08); /* border tipis */
-}
-
-
-.slides-wrapper {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
-}
-
-.slide {
-    min-width: 100%;
-    display: flex;
-    padding: 20px;
-}
-
-.product-image {
-    width: 40%;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.product-info {
-    padding: 20px;
-    flex: 1;
-}
-
-.product-info h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.product-info p {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.product-info strong {
-    font-size: 18px;
-    color: #333;
-}
-
-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    cursor: pointer;
-    font-size: 24px;
     z-index: 10;
-    border-radius: 4px;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
-
-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+.card .imgBx img {
+    max-width: 250px;
+    transition: 0.5s ease-in-out;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .slide {
-        flex-direction: column;
-        text-align: center;
-    }
+/* .card:hover .imgBx img {
+    transform: rotate(-360deg) translateX(-20px);
+} */
 
-    .product-image {
-        width: 100%;
-        height: 250px;
-    }
-}
-/* BUTTON WEB3 */
-.shop-btn {
-    margin-top: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 22px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid #00d4ff;
-    border-radius: 14px;
-    color: #00d4ff;
-    font-size: 18px;
-    transition: 0.3s;
-    backdrop-filter: blur(6px);
+/* ===== DETAILS ===== */
+.card .details {
+    position: absolute;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: crimson;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.5s ease-in-out;
 }
 
-.shop-btn:hover {
-    color: #fff;
-    background: #00d4ff;
-    box-shadow: 0 0 20px #00d4ff;
+.card:hover .details {
+    left: 300px;
 }
 
-/* ICON SHOPEE */
-.shop-icon {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-
-/* BUTTON NAVIGASI */
-.product-prev,
-.product-next {
+/* Arrow indicator */
+.card .details::before {
+    content: '';
     position: absolute;
     top: 50%;
+    left: 0;
     transform: translateY(-50%);
-    padding: 12px 18px;
-    font-size: 28px;
-    cursor: pointer;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid #7f5af0;
-    border-radius: 50%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #fff;
+}
+
+/* ===== TEXT ===== */
+.card .details h3 {
     color: #fff;
-    backdrop-filter: blur(4px);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.5em;
+    line-height: 1.1em;
+}
+
+.card .details h3 span {
+    font-size: 0.65em;
+    font-weight: 300;
+    opacity: 0.85;
+    text-transform: none;
+}
+
+.card .details h4 {
+    color: #fff;
+    font-size: 0.9em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.card .details p {
+    color: #fff;
+    font-size: 0.8em;
+    opacity: 0.85;
+}
+
+/* ===== SIZE ===== */
+/* .size {
+    display: flex;
+    gap: 10px;
+}
+
+.size li {
+    list-style: none;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    cursor: pointer;
+    opacity: 0.5;
     transition: 0.3s;
 }
 
-.product-prev:hover,
-.product-next:hover {
-    background: #7f5af0;
-    box-shadow: 0 0 20px #7f5af0;
+.size li:hover {
+    background: #fff;
+    color: #4ba9e9;
+    opacity: 1;
+} */
+
+/* ===== PRICE & BUTTON ===== */
+.group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.product-prev { left: 20px; }
-.product-next { right: 20px; }
+.card .details h2 {
+    color: #fff;
+    font-size: 2em;
+    font-weight: 600;
+}
 
-/* ANIMATION */
-@keyframes fade {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.card .details h2 sup {
+    font-weight: 300;
+}
+
+.card .details h2 small {
+    font-size: 0.75em;
+}
+
+.card .details a {
+    padding: 10px 25px;
+    background: crimson;
+    color: #4ba9e9;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.card .details a:hover {
+    background: #eaeaea;
+    padding:4px 8px;
+}
+
+.marketplace {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .card {
+        width: 300px;
+    }
+
+    /* .card:hover {
+        width: 300px;
+    }
+
+    .card:hover .details {
+        left: 0;
+    } */
+
+    .card:hover .imgBx img {
+        transform: none;
+    }
+}
+
+/* efek buka (sama seperti hover) */
+/* .card.active {
+    width: 600px;
+    z-index: 100;
+}
+
+.card.active .details {
+    left: 300px;
+} */
+/* ===========================
+   PRODUCT CARD 
+=========================== */
+
+@media (max-width: 1024px) {
+
+    .product-container {
+        padding: 20px;
+        gap: 24px;
+    }
+
+    .card {
+        width: 100%;
+        height: auto;              /* ✅ HILANGKAN HEIGHT */
+        flex-direction: column;
+        overflow: visible;         /* ✅ BIAR BISA MEMANJANG */
+    }
+
+    /* IMAGE */
+    /* .card .imgBx {
+        width: 100%;
+        min-width: 100%;
+        height: auto;            
+        padding: 30px 0;
+    } */
+
+    .card .imgBx {
+        padding: 40px 0;
+    }
+
+    .card .imgBx img {
+        width: 90%;
+        max-width: 320px;   /* ⬅️ BESAR */
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* DETAILS = ACCORDION */
+    .card .details {
+        position: relative;        /* ✅ BUKAN ABSOLUTE */
+        width: 100%;
+        height: 0;
+        padding: 0 20px;
+        overflow: hidden;
+        background: crimson;
+        transition: height 0.4s ease, padding 0.4s ease;
+    }
+
+    .card.active .details {
+        height: auto;
+        padding: 20px;
+    }
+
+    /* MATIKAN LOGIKA DESKTOP */
+    .card:hover {
+        width: 100%;
+    }
+
+    .card:hover .details {
+        left: 0;
+    }
+
+    .card .details::before {
+        display: none;
+    }
+}
+
+
+/* TAP INSTRUCTION */
+@media (max-width: 1024px) {
+    .card::after {
+        content: "Tap untuk detail";
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        padding: 8px;
+        display: block;
+    }
+
+    .card.active::after {
+        display: none;
+    }
 }
 
 
 /* =======================================
    TESTIMONI SECTION
 ======================================= */
-.testimoni { padding: 80px 0; background: #f5f5f5; }
-.testimoni .title { text-align: center; margin-bottom: 50px; font-size: 30px; font-weight: 700; }
 
-.testimoni .carousel .card {
-    background: #fff; border-radius: 15px; padding: 20px 25px;
-    transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+.testimoni {
+    padding: 80px 0;
+    background: #f5f5f5;
 }
-.testimoni .carousel .card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-.testimoni .carousel .card .box { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.testimoni .carousel .card img {
-    height: 100px; width: 100px; object-fit: cover; border-radius: 50%; border: 4px solid #ff004f; display: block; margin: 0 auto;
-}
-.testimoni .carousel .card .text { font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 8px; }
-.testimoni .carousel .card p { font-size: 15px; color: #444; line-height: 1.5; padding: 0 10px; }
 
-/* OWL carousel dot fixes (if used) */
-.owl-dots { margin-top: 20px !important; }
+.testimoni .title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.testimoni .owl-carousel {
+    position: relative;
+}
+
+/* CARD KHUSUS TESTIMONI */
+.testimoni-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.testimoni-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+
+.testimoni-card img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 0%;
+    border: 4px solid crimson;
+    margin-bottom: 15px;
+}
+
+.testimoni-card .text {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.testimoni-card p {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* OWL FIX */
+.owl-stage,
+.owl-item {
+    display: flex;
+}
+
+.owl-item {
+    justify-content: center;
+}
+
+/* DOT */
+.owl-dots {
+    margin-top: 25px !important;
+}
+
 .owl-dot span {
-    width: 12px !important; height: 12px !important; background: #bbb !important; border-radius: 50%; transition: 0.3s;
+    width: 12px !important;
+    height: 12px !important;
+    background: #bbb !important;
 }
-.owl-dot.active span { background: #ff004f !important; width: 16px !important; height: 16px !important; }
+
+.owl-dot.active span {
+    background: crimson !important;
+    width: 16px !important;
+    height: 16px !important;
+}
 
 /* =======================================
    SPLASH SCREEN
@@ -926,59 +1115,58 @@ footer span a:hover { text-decoration: underline; }
 
 /* ===== MODAL TESTIMONI ===== */
 .testimoni-modal {
-    display: none;
+    display: none; /* modal default hidden */
     position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0,0,0,0.7);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    z-index: 99999;   
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertikal */
 }
+.testimoni-modal.active {
+    display: flex;
+    animation: fadeIn 0.4s ease forwards;
+}
+
 
 .modal-content {
     background: #fff;
+    max-width: 420px;
     width: 90%;
-    max-width: 450px;
-    padding: 25px;
-    border-radius: 16px;
+    padding: 30px;
+    border-radius: 18px;
     text-align: center;
     position: relative;
-    animation: fadeIn 0.25s ease;
 }
 
 .modal-content img {
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    margin-bottom: 15px;
+    object-fit: cover;
 }
 
 .modal-content h3 {
-    margin-top: 10px;
     font-size: 22px;
-    font-weight: 600;
+    margin-top: 10px;
 }
 
 .modal-content p {
-    font-size: 16px;
     margin-top: 10px;
-    line-height: 1.5;
+    font-size: 16px;
 }
 
 .modal-close {
     position: absolute;
     top: 12px;
     right: 18px;
-    font-size: 32px;
-    color: #222;
+    font-size: 30px;
     cursor: pointer;
-    font-weight: bold;
 }
+.testimoni-card {
+    pointer-events: auto;
+}
+
 
 @keyframes fadeIn {
     from {
